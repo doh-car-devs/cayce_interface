@@ -1,0 +1,400 @@
+[{
+        "id": 2,
+        "division": 3,
+        "section": 19,
+        "program": "VDPCP-D",
+        "description": "Vector-borne Disease Prevention and Control Program - Dengue"
+    },
+    {
+        "id": 3,
+        "division": 3,
+        "section": 19,
+        "program": "VDPCP-M",
+        "description": "Vector-borne Disease Prevention and Control Program - Malaria"
+    },
+    {
+        "id": 4,
+        "division": 3,
+        "section": 19,
+        "program": "VDPCP-C",
+        "description": "Vector-borne Disease Prevention and Control Program - Chikungunya"
+    },
+    {
+        "id": 5,
+        "division": 3,
+        "section": 19,
+        "program": "VDPCP-Z",
+        "description": "Vector-borne Disease Prevention and Control Program - Zika"
+    },
+    {
+        "id": 6,
+        "division": 3,
+        "section": 19,
+        "program": "VDPCP-L",
+        "description": "Vector-borne Disease Prevention and Control Program - Leptospirosis"
+    },
+    {
+        "id": 7,
+        "division": 3,
+        "section": 19,
+        "program": "VHBCP",
+        "description": "Viral Hepatitis B and C Program"
+    },
+    {
+        "id": 8,
+        "division": 3,
+        "section": 19,
+        "program": "IHCP",
+        "description": "Integrated Helminth Control Program"
+    },
+    {
+        "id": 9,
+        "division": 3,
+        "section": 19,
+        "program": "NTP",
+        "description": "National Tubercolosis Control Program"
+    },
+    {
+        "id": 10,
+        "division": 3,
+        "section": 19,
+        "program": "FWBDP",
+        "description": "Food and Water Borne Diseases Program"
+    },
+    {
+        "id": 11,
+        "division": 3,
+        "section": 19,
+        "program": "EREIDP",
+        "description": "Emerging and Re - Emerging Infectious Diseases Program"
+    },
+    {
+        "id": 12,
+        "division": 3,
+        "section": 19,
+        "program": "EOHP",
+        "description": "Environmental and Occupational Health Program"
+    },
+    {
+        "id": 13,
+        "division": 3,
+        "section": 19,
+        "program": "RPCP",
+        "description": "Rabies Prevention and Control Program"
+    },
+    {
+        "id": 14,
+        "division": 3,
+        "section": 19,
+        "program": "NLCP",
+        "description": "National Leprosy Control Program"
+    },
+    {
+        "id": 15,
+        "division": 3,
+        "section": 19,
+        "program": "NASPCP",
+        "description": "National AIDS-HIV/STI Prevention and Control Program"
+    },
+    {
+        "id": 16,
+        "division": 3,
+        "section": 19,
+        "program": "NCDPCP",
+        "description": "Non-Communicable Diseases Prevention and Control Program"
+    },
+    {
+        "id": 17,
+        "division": 3,
+        "section": 19,
+        "program": "ReDCoP",
+        "description": "Renal Disease Control Program"
+    },
+    {
+        "id": 18,
+        "division": 3,
+        "section": 19,
+        "program": "DDAPTP",
+        "description": "Dangerous Drug Abuse Prevention and Treatment Program"
+    },
+    {
+        "id": 19,
+        "division": 3,
+        "section": 19,
+        "program": "MHP",
+        "description": "Mental Health Program"
+    },
+    {
+        "id": 20,
+        "division": 3,
+        "section": 19,
+        "program": "BNBP",
+        "description": "Botika ng Bayan Program"
+    },
+    {
+        "id": 21,
+        "division": 3,
+        "section": 19,
+        "program": "HWPPWD",
+        "description": "Health and Wellness Program for Persons with Disabilities"
+    },
+    {
+        "id": 22,
+        "division": 3,
+        "section": 19,
+        "program": "PBP",
+        "description": "Prevention of Blindness Program"
+    },
+    {
+        "id": 23,
+        "division": 3,
+        "section": 19,
+        "program": "MAP",
+        "description": "Medicine Access Program"
+    },
+    {
+        "id": 24,
+        "division": 3,
+        "section": 19,
+        "program": "TAHCP",
+        "description": "Traditional and Alternative Health Care Program"
+    },
+    {
+        "id": 25,
+        "division": 3,
+        "section": 19,
+        "program": "SAP",
+        "description": "Substance Abuse Program (Smoking and Alcohol)"
+    },
+    {
+        "id": 26,
+        "division": 3,
+        "section": 22,
+        "program": "EPI/NIP",
+        "description": "Expanded Program on Immunization / National Immunizatin Program"
+    },
+    {
+        "id": 27,
+        "division": 3,
+        "section": 22,
+        "program": "HNIHP",
+        "description": "Newborn and Infant Health Program"
+    },
+    {
+        "id": 28,
+        "division": 3,
+        "section": 22,
+        "program": "CDDPP",
+        "description": "Child Development and Disabiity Prevention Program"
+    },
+    {
+        "id": 29,
+        "division": 3,
+        "section": 22,
+        "program": "MSCP",
+        "description": "Management of Sick Children Program"
+    },
+    {
+        "id": 30,
+        "division": 3,
+        "section": 22,
+        "program": "NP",
+        "description": "Nutrition Program"
+    },
+    {
+        "id": 31,
+        "division": 3,
+        "section": 22,
+        "program": "AHDP",
+        "description": "Adolescent Health and Development Program"
+    },
+    {
+        "id": 32,
+        "division": 3,
+        "section": 22,
+        "program": "OHP",
+        "description": "Oral Health Program"
+    },
+    {
+        "id": 33,
+        "division": 3,
+        "section": 22,
+        "program": "NFPP",
+        "description": "National Family Planning Program"
+    },
+    {
+        "id": 34,
+        "division": 3,
+        "section": 22,
+        "program": "NSMP",
+        "description": "National Safe Motherhood Program"
+    },
+    {
+        "id": 35,
+        "division": 3,
+        "section": 22,
+        "program": "WCPP",
+        "description": "Women and Children Protection Program"
+    },
+    {
+        "id": 36,
+        "division": 3,
+        "section": 22,
+        "program": "NVBSP",
+        "description": "National Voluntary Blood Services Program"
+    },
+    {
+        "id": 37,
+        "division": 3,
+        "section": 22,
+        "program": "MIRH",
+        "description": "Men's Involvement in Reproductive Health"
+    },
+    {
+        "id": 38,
+        "division": 3,
+        "section": 22,
+        "program": "HWPSC",
+        "description": "Health and Wellness Program for Senior Citizens"
+    },
+    {
+        "id": 39,
+        "division": 3,
+        "section": 2,
+        "program": "HFEP-I",
+        "description": "Health Facility and Enhancement Program - Infrastructure"
+    },
+    {
+        "id": 40,
+        "division": 3,
+        "section": 2,
+        "program": "HFEP-E",
+        "description": "Health Facility and Enhancement Program - Equipment"
+    },
+    {
+        "id": 41,
+        "division": 3,
+        "section": 2,
+        "program": "SDN",
+        "description": "Service Delivery Network"
+    },
+    {
+        "id": 42,
+        "division": 3,
+        "section": 2,
+        "program": "HLGP",
+        "description": "Health Leadership and Governance Program"
+    },
+    {
+        "id": 43,
+        "division": 3,
+        "section": 2,
+        "program": "IP/GIDA",
+        "description": "Indigenous Peoples / Geographically Isolated and Disadvantaged Areas"
+    },
+    {
+        "id": 44,
+        "division": 3,
+        "section": 2,
+        "program": "IPCP",
+        "description": "Infection Prevention and Control Program"
+    },
+    {
+        "id": 45,
+        "division": 3,
+        "section": 2,
+        "program": "BHWP",
+        "description": "Barangay Health Workers Program"
+    },
+    {
+        "id": 46,
+        "division": 3,
+        "section": 18,
+        "program": "PIDSR",
+        "description": "Philippine Integrated Disease Surveillance & Response"
+    },
+    {
+        "id": 47,
+        "division": 3,
+        "section": 18,
+        "program": "ESR",
+        "description": "Event-Based Surveillance and Response"
+    },
+    {
+        "id": 48,
+        "division": 3,
+        "section": 18,
+        "program": "VPDS",
+        "description": "Vaccine Preventable Disease Surveillance"
+    },
+    {
+        "id": 49,
+        "division": 3,
+        "section": 18,
+        "program": "LABBS",
+        "description": "Laboratory & Blood Bank Surveillance"
+    },
+    {
+        "id": 50,
+        "division": 3,
+        "section": 18,
+        "program": "OI",
+        "description": "Outbreak Investigation"
+    },
+    {
+        "id": 51,
+        "division": 3,
+        "section": 18,
+        "program": "SHAS",
+        "description": "STI-HIV/AIDS Surveillance"
+    },
+    {
+        "id": 52,
+        "division": 3,
+        "section": 18,
+        "program": "FHSIS",
+        "description": "Field Health Services Information System"
+    },
+    {
+        "id": 53,
+        "division": 3,
+        "section": 18,
+        "program": "NHLN",
+        "description": "National Health Laboratory Network"
+    },
+    {
+        "id": 54,
+        "division": 3,
+        "section": 18,
+        "program": "HSPMES",
+        "description": "Health Sector Performance Monitoring and Evaluation System"
+    },
+    {
+        "id": 55,
+        "division": 3,
+        "section": 18,
+        "program": "MAIP",
+        "description": "Medical Assistance for Indigent Patients"
+    },
+    {
+        "id": 56,
+        "division": 3,
+        "section": 18,
+        "program": "HEPA",
+        "description": "Health Education Promotion and Advocacy"
+    },
+    {
+        "id": 57,
+        "division": 3,
+        "section": 22,
+        "program": "ISO",
+        "description": "ISO Point Person (Cluster)"
+    },
+    {
+        "id": 58,
+        "division": 3,
+        "section": 22,
+        "program": "FPP",
+        "description": "Family Planning Program"
+    }
+]

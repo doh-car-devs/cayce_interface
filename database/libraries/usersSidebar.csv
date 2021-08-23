@@ -1,0 +1,63 @@
+id,user_id,name,link,uri,link_group
+1,1,Dashboard,systemadmin.index,systemadmin/index,System Management
+2,1,Dashboard,systemadmin.index,systemadmin/index,System Management
+3,1,Dashboard,systemadmin.index,systemadmin/index,System Management
+4,2,WFP,wfp.index,wfp/index,Financial Management
+5,3,WFP,wfp.index,wfp/index,Financial Management
+6,4,WFP,wfp.index,wfp/index,Financial Management
+7,5,WFP,wfp.index,wfp/index,Financial Management
+8,6,WFP,wfp.index,wfp/index,Financial Management
+9,7,WFP,wfp.index,wfp/index,Financial Management
+10,8,WFP,wfp.index,wfp/index,Financial Management
+11,9,WFP,wfp.index,wfp/index,Financial Management
+12,10,WFP,wfp.index,wfp/index,Financial Management
+13,11,WFP,wfp.index,wfp/index,Financial Management
+14,12,WFP,wfp.index,wfp/index,Financial Management
+15,13,WFP,wfp.index,wfp/index,Financial Management
+16,14,WFP,wfp.index,wfp/index,Financial Management
+17,15,WFP,wfp.index,wfp/index,Financial Management
+18,16,WFP,wfp.index,wfp/index,Financial Management
+19,17,WFP,wfp.index,wfp/index,Financial Management
+20,18,WFP,wfp.index,wfp/index,Financial Management
+21,19,WFP,wfp.index,wfp/index,Financial Management
+22,20,WFP,wfp.index,wfp/index,Financial Management
+23,21,WFP,wfp.index,wfp/index,Financial Management
+24,22,WFP,wfp.index,wfp/index,Financial Management
+25,23,WFP,wfp.index,wfp/index,Financial Management
+26,24,WFP,wfp.index,wfp/index,Financial Management
+27,9,APP,pt.app,pt/app,Financial Management
+28,7,Inventory,inv.index,inv/index,TWG
+29,7,Item Request,inv.twg.index,inv/twg/index,TWG
+30,13,Annual Budget,budget.annual,budget/annual,Budget Allocation
+31,2,Annual Budget,budget.annual,budget/annual,Budget Allocation
+32,9,Abstract of Canvas,bac.abstractCanvas,bac/abstractCanvas,Bids & Awards
+33,9,Abstract of Bids,bac.abstract,bac/abstract,Bids & Awards
+34,9,Items,bac.abstract.item,bac/abstract/item,hidden
+35,2,PPMP,ppmp.index,ppmp/index,Financial Management
+36,3,PPMP,ppmp.index,ppmp/index,Financial Management
+37,4,PPMP,ppmp.index,ppmp/index,Financial Management
+38,5,PPMP,ppmp.index,ppmp/index,Financial Management
+39,6,PPMP,ppmp.index,ppmp/index,Financial Management
+40,7,PPMP,ppmp.index,ppmp/index,Financial Management
+41,8,PPMP,ppmp.index,ppmp/index,Financial Management
+42,9,PPMP,ppmp.index,ppmp/index,Financial Management
+43,10,PPMP,ppmp.index,ppmp/index,Financial Management
+44,11,PPMP,ppmp.index,ppmp/index,Financial Management
+45,12,PPMP,ppmp.index,ppmp/index,Financial Management
+46,13,PPMP,ppmp.index,ppmp/index,Financial Management
+47,14,PPMP,ppmp.index,ppmp/index,Financial Management
+48,15,PPMP,ppmp.index,ppmp/index,Financial Management
+49,16,PPMP,ppmp.index,ppmp/index,Financial Management
+50,17,PPMP,ppmp.index,ppmp/index,Financial Management
+51,18,PPMP,ppmp.index,ppmp/index,Financial Management
+52,19,PPMP,ppmp.index,ppmp/index,Financial Management
+53,20,PPMP,ppmp.index,ppmp/index,Financial Management
+54,21,PPMP,ppmp.index,ppmp/index,Financial Management
+55,22,PPMP,ppmp.index,ppmp/index,Financial Management
+56,23,PPMP,ppmp.index,ppmp/index,Financial Management
+57,24,PPMP,ppmp.index,ppmp/index,Financial Management
+58,24,Division WFP,wfp.manage.division,wfp/manage/division,Financial Management
+59,25,Division WFP,wfp.manage.division,wfp/manage/division,Financial Management
+60,26,Division WFP,wfp.manage.division,wfp/manage/division,Financial Management
+61,27,Division WFP,wfp.manage.division,wfp/manage/division,Financial Management
+62,8,Pruchase Order,pt.po,pt/po,Orders

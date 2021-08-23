@@ -1,0 +1,41 @@
+UPDATE `categories` 
+SET `categories_status` = 0 
+WHERE categories.categories_id IN(
+	SELECT categories_id
+	FROM products_to_categories
+	JOIN products ON products_to_categories.categories_id=products.master_categories_id	
+	WHERE products.products_status = 0)
+
+SELECT * 
+FROM categories
+WHERE categories.categories_id IN(
+	SELECT categories_id
+	FROM products_to_categories
+	JOIN products ON products_to_categories.categories_id=products.master_categories_id	
+	WHERE products.products_status = 0)
+=============================
+==============================
+
+SELECT *
+FROM products
+WHERE products.products_id NOT IN(
+	SELECT products_to_categories.products_id
+	FROM products_to_categories
+	JOIN products ON products_to_categories.categories_id=products.products_id
+	WHERE products.products_status = 0
+	)
+
+
+
+
+
+`categories`.`categories_id` = 1;
+
+select categories, products
+where product_status = 0
+
+-----------
+SELECT * FROM `categories` 
+JOIN products_to_categories ON categories.categories_id=products_to_categories.categories_id
+WHERE `categories_status` = 1;
+------------

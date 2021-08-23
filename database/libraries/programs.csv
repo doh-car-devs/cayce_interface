@@ -1,0 +1,77 @@
+id,division,section,program,description
+2,3,19,VDPCP-D,Vector-borne Disease Prevention and Control Program - Dengue
+3,3,19,VDPCP-M,Vector-borne Disease Prevention and Control Program - Malaria
+4,3,19,VDPCP-C,Vector-borne Disease Prevention and Control Program - Chikungunya
+5,3,19,VDPCP-Z,Vector-borne Disease Prevention and Control Program - Zika
+6,3,19,VDPCP-L,Vector-borne Disease Prevention and Control Program - Leptospirosis
+7,3,19,VHBCP,Viral Hepatitis B and C Program
+8,3,19,IHCP,Integrated Helminth Control Program
+9,3,19,NTP,National Tubercolosis Control Program
+10,3,19,FWBDP,Food and Water Borne Diseases Program
+11,3,19,EREIDP,Emerging and Re - Emerging Infectious Diseases Program
+12,3,19,EOHP,Environmental and Occupational Health Program
+13,3,19,RPCP,Rabies Prevention and Control Program
+14,3,19,NLCP,National Leprosy Control Program
+15,3,19,NASPCP,National AIDS-HIV/STI Prevention and Control Program
+16,3,19,NCDPCP,Non-Communicable Diseases Prevention and Control Program
+17,3,19,ReDCoP,Renal Disease Control Program
+18,3,19,DDAPTP,Dangerous Drug Abuse Prevention and Treatment Program
+19,3,19,MHP,Mental Health Program
+20,3,19,BNBP,Botika ng Bayan Program
+21,3,19,HWPPWD,Health and Wellness Program for Persons with Disabilities
+22,3,19,PBP,Prevention of Blindness Program
+23,3,19,MAP,Medicine Access Program
+24,3,19,TAHCP,Traditional and Alternative Health Care Program
+25,3,19,SAP,Substance Abuse Program (Smoking and Alcohol)
+26,3,22,EPI/NIP,Expanded Program on Immunization / National Immunizatin Program
+27,3,22,HNIHP,Newborn and Infant Health Program
+28,3,22,CDDPP,Child Development and Disabiity Prevention Program
+29,3,22,MSCP,Management of Sick Children Program
+30,3,22,NP,Nutrition Program
+31,3,22,AHDP,Adolescent Health and Development Program
+32,3,22,OHP,Oral Health Program
+33,3,22,NFPP,National Family Planning Program
+34,3,22,NSMP,National Safe Motherhood Program
+35,3,22,WCPP,Women and Children Protection Program
+36,3,22,NVBSP,National Voluntary Blood Services Program
+37,3,22,MIRH,Men's Involvement in Reproductive Health
+38,3,22,HWPSC,Health and Wellness Program for Senior Citizens
+39,1,2,HFEP-I,Health Facility and Enhancement Program - Infrastructure
+40,1,2,HFEP-E,Health Facility and Enhancement Program - Equipment
+41,3,2,SDN,Service Delivery Network
+42,3,2,HLGP,Health Leadership and Governance Program
+43,3,2,IP/GIDA,Indigenous Peoples / Geographically Isolated and Disadvantaged Areas
+44,3,2,IPCP,Infection Prevention and Control Program
+45,3,2,BHWP,Barangay Health Workers Program
+46,3,18,PIDSR,Philippine Integrated Disease Surveillance & Response
+47,3,18,ESR,Event-Based Surveillance and Response
+48,3,18,VPDS,Vaccine Preventable Disease Surveillance
+49,3,18,LABBS,Laboratory & Blood Bank Surveillance
+50,3,18,OI,Outbreak Investigation
+51,3,18,SHAS,STI-HIV/AIDS Surveillance
+52,3,18,FHSIS,Field Health Services Information System
+53,3,18,NHLN,National Health Laboratory Network
+54,3,18,HSPMES,Health Sector Performance Monitoring and Evaluation System
+55,3,18,MAIP,Medical Assistance for Indigent Patients
+56,3,18,HEPA,Health Education Promotion and Advocacy
+57,3,22,ISO,ISO Point Person (Cluster)
+58,3,22,FPP,Family Planning Program
+59,1,1,Planning Section,Planning Section
+60,1,2,HFDEU,Health Facility Development and Enhancement Unit
+61,1,3,HEMS,Health Emergency Management Section
+62,1,4,Legal,Leal Section
+63,1,5,CDOHO,City Department of Health
+64,1,6,PDOHO,Provincial Department of Health
+65,2,7,ICT,Information Communication Technology Section
+66,2,8,PT,Procurement Team Section
+67,2,9,BAC,Bids and Awards Committee Section
+68,2,10,GSO,General Services Office
+69,2,11,HR,Human Resources Section
+70,2,12,MMT,Material Management Team
+71,2,13,Budget,Budget Section
+72,2,14,Accounting,Accounting Section
+73,2,15,Records,Records Section
+74,2,16,Dorm,Dorm 
+75,2,17,Cash,Cash
+76,4,18,RLED,Regulations Licensing and Enforcement
+78,99,99,DOH-CAR,DOH-CAR

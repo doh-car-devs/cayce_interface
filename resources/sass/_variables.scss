@@ -1,0 +1,171 @@
+// Body
+$body-bg: #f8fafc;
+$body-bg-green: #3d725e;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$olive: #3d9970;
+
+.blue {color: $blue;}
+.indigo {color: $indigo;}
+.purple {color: $purple;}
+.pink {color: $pink;}
+.red {color: $red;}
+.orange {color: $orange;}
+.yellow {color: $yellow;}
+.green {color: $green;}
+.teal {color: $teal;}
+.cyan {color: $cyan;}
+.olive {color: $olive;}
+.u-tableLight {background-color: #c5ccd6;}
+.u-tableLight2 {background-color: #e6edf7;}
+.u-tableDark {background-color: #343A40;}
+.u-tableDark2 {background-color: #5e6873;}
+.bg-olive {background-color: $olive}
+.bg-cyan {background-color: $cyan}
+.bg-greennn {background-color: $body-bg-green}
+.modal-xl {
+    max-width: 90% !important;
+}
+
+.bigdrop.select2-container .select2-results {max-height: 200px;}
+.bigdrop .select2-results {max-height: 200px;}
+.bigdrop .select2-choices {min-height: 150px; max-height: 150px; overflow-y: auto;}
+
+#select2-wfpDeliverable-container {
+    width: 200px; // Adjustable
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .select2-selection { height: auto !important;}
+
+  .files input {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 120px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+ }
+.files{ position:relative}
+.files:after {  pointer-events: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 50px;
+    right: 0;
+    height: 56px;
+    content: "";
+    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.color input{ background-color:#f1f1f1;}
+.files:before {
+    position: absolute;
+    top: 50px;
+    left: 0;  pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 57px;
+    content: " or drag it here. ";
+    display: block;
+    margin: 0 auto;
+    color: #2ea591;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+// .table-condensed{
+//     font-size: 12px;
+// }
+
+@media only screen and (min-width: 600px) {
+    .responsive-dropdown {
+        width: 420px;
+    }
+}
+@media only screen and (max-width: 300px) {
+    .responsive-dropdown {
+        width: 300px;
+    }
+}
+
+
+.loader-simp {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+//   .loading-ajax {
+//     background-color: rgba(0,0,0,1) ;
+//     width: 1000px;
+//     height: 1000px;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     z-index: 10001;
+// }
+
+
+.overlay{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999 ;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+body{
+    text-align: center;
+}
+/* Turn off scrollbar when body element has the loading class */
+body.loading{
+    overflow: hidden;
+}
+/* Make spinner image visible when body element has the loading class */
+body.loading .overlay{
+    display: block;
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
