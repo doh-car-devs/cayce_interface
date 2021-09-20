@@ -5,68 +5,41 @@
     <input type="hidden" value="{{$data['year'] ?? ''}}" name="redirect_year">
     <input type="hidden"  id="redirect_value" name="redirect_value">
     @include('_interface.snip.hiddenInput')
-    <table id="mainwfptable" class="table table-bordered table-sm table-hover compact" style="overflow: scroll; overflow: auto; width:100%">
-        <thead class="thead-dark">
+    <table id="wfp" class="table-bordered table-hover table-striped overflow-auto">
+        <thead>
             <tr>
-                {{-- hidden --}}
-                <th rowspan="2">Function Type</th>
-                <th rowspan="2"></th>
-                <th rowspan="2">Take Action <br> <small>(click/hover button to view available actions)</small></th>
-                {{-- hidden --}}
-                <th rowspan="2">Output Functions / Deliverables</th>
-                <th rowspan="2">Activities For Outputs</th>
-                <th rowspan="2">Timeframe</th>
-                <th colspan="4" class="text-center">Target</th>
-                <th colspan="3" class="text-center">Resource Requirements</th>
-                <th rowspan="2">Responsible Person</th>
-                <th rowspan="2">Program</th>
-                <th rowspan="2">Division Head Comment & Status</th>
-                {{-- <th rowspan="2">Status</th> --}}
-                {{-- <th rowspan="2">Take Action</th> --}}
+                <th rowspan="2" class="px-1"></th>
+                <th rowspan="2" class="px-1"></th>
+                <th rowspan="2" class="text-center px-1">Function Type</th>
+                <th rowspan="2" class="text-center px-1">Output Functions / Deliverables</th>
+                <th rowspan="2" class="text-center px-1">Activities For Outputs</th>
+                <th rowspan="2" class="text-center px-1">Timeframe</th>
+                <th colspan="4" class="text-center px-1">Target</th>
+                <th colspan="3" class="text-center px-1">Resource Requirements</th>
+                <th rowspan="2" class="text-center px-1">Responsible Person</th>
+                <th rowspan="2" class="text-center px-1">Program</th>
+                <th rowspan="2" class="text-center px-1">Division Head Comment & Status</th>
             </tr>
             <tr>
-                <th>Q1</th>
-                <th>Q2</th>
-                <th>Q3</th>
-                <th>Q4</th>
-                <th>Item</th>
-                <th>Cost</th>
-                <th>Fund Source</th>
+                <th class="text-center px-1">Q1</th>
+                <th class="text-center px-1">Q2</th>
+                <th class="text-center px-1">Q3</th>
+                <th class="text-center px-1">Q4</th>
+                <th class="text-center px-1">Item</th>
+                <th class="text-center px-1">Cost</th>
+                <th class="text-center px-1">Fund Source</th>
             </tr>
         </thead>
         <tbody class="wfptablebody">
             @foreach ($data['wfpCategory'] as $category)
-                {{-- @foreach ($data['allwfp'] as $i) --}}
-                {{-- @foreach ($data['lockedWFPsinceThereisPPMP'] as $isis) --}}
                     @foreach ($data['allApprovedWFP'] as $key => $i)
                         @if ($category == $i['function_type']  &&  $i['wfp_type'] !== 'supplemental')
-                            <tr
-                            @if (isset($i['cost']) && isset($i['total_cost_ppmp']))
-                                @if(
-                                    number_format($i['cost'] - $i['total_cost_ppmp']) < 0
-                                    ) style="background-color: rgb(252, 81, 81);" @endif
-                                @if(
-                                    number_format($i['cost'] - $i['total_cost_ppmp']) > 0
-                                    ) style="box-shadow:inset 0px 10px 0px 10px rgb(248, 252, 0, .5);" @endif
-                            @endif
-                            {{-- @if(
-                                number_format($i['cost'] - $i['total_cost_ppmp']) > 0
-                                ) style="outline: 3px dashed  rgba(146, 255, 191, 0.658);" @endif --}}
-                            >
-                                @switch($category)
-                                    @case('A. Strategic Functions') <td class="font-weight-bold align-middle bg-gray-dark">{{$i['function_type']}}</td> @break
-                                    @case('B. Core Functions') <td class="font-weight-bold align-middle bg-gray-dark">{{$i['function_type']}}</td> @break
-                                    @case('C. Support Functions') <td class="font-weight-bold align-middle bg-gray-dark">{{$i['function_type']}}</td> @break
-                                    @default
-                                @endswitch
-                                <td>
-                                    {{$i['origwfp_id']}}
-                                </td>
-                                <td class="align-middle">
-                                    {{$i['origwfp_id']}}
+                            <tr>
+                                <td class="px-1">{{ $i['origwfp_id'] }}</td>
+                                <td class="align-middle text-center px-1">
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle btn-success" type="button" id="dropdownMenu2"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 
                                             @if($i['OTF_status'] == 'locked') <i class="fas fa-lock mr-1" style="color: red"></i> @else <i class="fas fa-lock-open mr-1" style="color: #ffff00"></i> @endif
                                             <b> ₱ {{number_format($i['cost'] - $i['total_cost_ppmp'], 2), '.', ','}}</b>
@@ -80,7 +53,6 @@
                                             <button type="button" id="edt_id" data-id="{{$i['function'].'||'. $i['activities'].'||'. $i['timeframe'].'||'. $i['q1'].'||'. $i['q2'].'||'. $i['q3'].'||'. $i['q4'].'||'. $i['item'].'||'. $i['cost'].'||'. $i['annual_budget_program_id'].'||'. $i['status'].'||'. $i['function_type'].'||'. $i['year'].'||'. $i['devliverable_id'].'||'. $i['resp_person']}}" class="btn btn-primary btn-block" data-toggle="modal" data-target="#edit" data-placement="left" data-tt="tooltip" title="Edit this entry"><i class="fas fa-edit"></i> Edit WFP</button>
                                             <button
                                                 type="button" id="dlt_id" data-id="{{$i['devliverable_id']}}"
-                                                {{-- tyty="{{$data['lockedWFPsinceThereisPPMP'][$key]['WFP_ID'] }} | {{ $i['origwfp_id']}}" --}}
                                                 tyty="{{ $i['OTF_status']}}"
                                                 class="btn @if($i['OTF_status'] == 'locked') btn-secondary @else btn-danger @endif btn-block" @if($i['OTF_status'] == 'locked') disabled @else  @endif data-toggle="modal" data-target="#delete" data-placement="left" data-tt="tooltip" title="Delete this entry">
                                                 <i class="fas fa-trash"></i>
@@ -91,30 +63,20 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">{{$i['function']}}</td>
-                                <td>{{$i['activities']}}</td>
-                                <td>{{$i['timeframe']}}</td>
-                                <td>{{$i['q1']}}</td>
-                                <td>{{$i['q2']}}</td>
-                                <td>{{$i['q3']}}</td>
-                                <td>{{$i['q4']}}</td>
-                                <td>{{$i['item']}}</td>
-                                <td>{{number_format($i['cost'], 2), '.', ','}}</td>
-                                <td>
-                                    {{-- @if ($i['cost'] == 0 ) --}}
-                                        {{-- SRDS --}}
-                                    {{-- @else --}}
-                                        {{$i['parent_type_abbr']}} | {{$i['source_name']}} | {{$i['type_abbr']}} | {{$i['budget_program_name']}}
-                                    {{-- @endif --}}
-                                </td>
-                                <td>{{$i['name_family']}},{{$i['name']}}</td>
-                                <td>{{$i['program_abbr']}}</td>
-                                {{-- <td class="align-middle">
-                                    @if ($i['comment'] !== NULL)<span data-toggle="tooltip" title="Division chief comment" class="badge bg-warning d-flex justify-content-center"></span>{{$i['comment']}}
-                                </td>
-                                    @else -
-                                </td> --}}
-                                <td class="align-middle">
+                                <td class="px-1">{{ $i['function_type'] }}</td>
+                                <td class="align-middle px-1">{{$i['function']}}</td>
+                                <td class="px-1">{{$i['activities']}}</td>
+                                <td class="px-1">{{$i['timeframe']}}</td>
+                                <td class="px-1">{{$i['q1']}}</td>
+                                <td class="px-1">{{$i['q2']}}</td>
+                                <td class="px-1">{{$i['q3']}}</td>
+                                <td class="px-1">{{$i['q4']}}</td>
+                                <td class="px-1">{{$i['item']}}</td>
+                                <td class="px-1">{{number_format($i['cost'], 2), '.', ','}}</td>
+                                <td class="px-1">{{ $i['parent_type_abbr'].' - '.$i['source_name'].' - '.$i['type_abbr'].' - '.$i['budget_program_name'] }}</td>
+                                <td class="px-1">{{$i['name_family']}},{{$i['name']}}</td>
+                                <td class="px-1">{{$i['program_abbr']}}</td>
+                                <td class="align-middle px-1">
                                     <span data-toggle="tooltip" title="Division chief comment" class="badge bg-warning d-flex justify-content-center"></span>{{$i['comment']}}
                                     @switch($i['status'])
                                         @case('pending') <span data-toggle="tooltip" title="Entry Status" class="badge bg-warning">Pending</span> @break
@@ -124,12 +86,9 @@
                                         @default
                                     @endswitch
                                 </td>
-                                {{-- <td class="align-middle">
-                                </td> --}}
                             </tr>
                         @endif
                     @endforeach
-                {{-- @endforeach --}}
             @endforeach
         </tbody>
         <tfoot>
@@ -159,5 +118,21 @@
     <hr>
     <p><button class="btn btn-success btn-block">Generate Consolidated WFP </button></p>
 </form>
-    {{-- <p><button class="btn btn-warning btn-block disabled">Generation of WFP file is currently disabled for updates. Please checkback in later or call ICT section local 150</button></p> --}}
 
+<script>
+    $(document).ready(function () {
+        $('table#wfp').DataTable({
+            dom: '<"d-flex justify-content-between"<f><"d-flex align-items-center"<l><p>>>',
+            order: [[2, 'desc']],
+            autoWidth: false,
+            columnDefs: [
+                { targets: [0, 1], orderable: false },
+                { targets: 0, checkboxes: { selectRow: true } },
+            ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child',
+            },
+        });
+    });
+</script>

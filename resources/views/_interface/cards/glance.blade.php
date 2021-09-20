@@ -12,9 +12,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#WFP-stat" data-toggle="tab">WFP Status</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#more-tab" data-toggle="tab">More</a>
-                </li>
             </ul>
         </div>
     </div><!-- /.card-header -->
@@ -57,9 +54,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="chart tab-pane" id="more-tab" style="position: relative; height: 400px; overflow-y: auto;">
-                {{-- <span>soon...</span> --}}
             </div>
         </div>
     </div><!-- /.card-body -->

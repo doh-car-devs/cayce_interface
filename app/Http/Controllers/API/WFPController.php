@@ -33,8 +33,7 @@ class WFPController extends Controller
 
     public function index($entries = null)
     {
-        if (isset($_COOKIE['year'])) $year = unserialize(base64_decode($_COOKIE['year']));
-        else  $year = date('Y');
+        $year = isset($_COOKIE['year']) ? unserialize(base64_decode($_COOKIE['year'])) : date('Y');
 
         $input = array(
             'link' => '/api/create/wfp',
@@ -59,7 +58,7 @@ class WFPController extends Controller
         return  view('_wfp.index')->with('data', $data);
     }
 
-    public function  supplelmental_wfp_index($entries = null)
+    public function supplelmental_wfp_index($entries = null)
     {
         // return redirect()->back()->with('feature-new', 'We are working hard to bring you this feature very soon! Contact ICT local 150 for more info.');
         if (isset($_COOKIE['year'])) $year = unserialize(base64_decode($_COOKIE['year']));

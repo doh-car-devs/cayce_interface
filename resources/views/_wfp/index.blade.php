@@ -3,29 +3,27 @@
 	<div class="row">
 		<div class="col">
 			<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-				<li class="mr-3">
+				<li class="d-flex align-items-center">
+                    <span class="mr-2">Year:</span>
 					<form action="{{route('api.wfp.sort')}}" method="post">
 						@csrf
-						<select class="form-control mb-1" id="selected-yeara" name="year" onchange="this.form.submit()">
-							<option selected disabled>Selected year - {{$data['year']}}</option>
+						<select class="form-control form-control-sm mb-1" id="selected-year" name="year" onchange="this.form.submit()">
+							<option selected disabled>{{$data['year']}}</option>
 							@for ($i = 2015; $i < now()->year+4; $i++)
 							<option value="{{$i}}">{{$i}}</option>
 							@endfor
 						</select>
 					</form>
 				</li>
-				<li class="nav-item mr-3">
-					<a class="btn btn-primary mb-1  active btn-lg" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true"><i class="fas fa-table mr-1"></i> View WFP Table</a>
-                </li>
-
-				<li class="nav-item mr-3">
-                </li>
-
-				<li class="nav-item btn-group ml-auto">
-                    <a class="btn btn-secondary mb-1 btn-lg " data-toggle="modal" data-target="#edit2" id="deliverable-make-tab" data-toggle="pill" href="#deliverable-make" role="tab" aria-controls="deliverable-make" aria-selected="false"><i class="fas fa-plus-square mr-1"></i>Add NEW Deliverable</a>
-					<a class="btn btn-success mb-1 btn-lg " id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false"><i class="fas fa-plus-square mr-1"></i> Add NEW WFP</a>
-                    {{-- <u class="text-info" type="button" data-toggle="modal" data-target="#edit2" aria-expanded="false" aria-controls="collapseExample"> or CREATE new Deliverable</u> --}}
-                    {{-- <a class="btn btn-success mb-1 " id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false"><i class="fas fa-plus-square mr-1"></i> Create PPMP</a> --}}
+				<li class="nav-item ml-auto">
+                    <a class="btn btn-secondary mb-1" data-toggle="modal" data-target="#edit2" id="deliverable-make-tab" data-toggle="pill" href="#deliverable-make" role="tab" aria-controls="deliverable-make" aria-selected="false">
+                        <i class="fas fa-plus-square mr-1"></i>
+                        New Deliverable
+                    </a>
+					<a class="btn btn-success mb-1" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">
+                        <i class="fas fa-plus-square mr-1"></i>
+                        New WFP
+                    </a>
 				</li>
 			</ul>
 		</div>

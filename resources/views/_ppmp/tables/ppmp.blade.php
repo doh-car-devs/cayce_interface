@@ -11,7 +11,6 @@
                 {{-- hidden --}}
                 <th rowspan="2">Group</th>
                 {{-- hidden --}}
-                <th rowspan="2"></th>
                 <th rowspan="2">ID</th>
                 <th rowspan="2">Section</th>
                 <th rowspan="2">General Description</th>
@@ -51,7 +50,6 @@
                         ||$i['OTF_status'] !== null
                         ) style="background-color: rgb(252, 81, 81);" @endif>
                             <td colspan="18">{{$i['activities']}} (<small>{{$i['item']}}</small>)</td>
-                            <td>{{$i['ppmp_id']}}</td>
                             <td>{{$i['ppmp_id']}}</td>
                             <td>{{$i['program_abbr']}} -
                             @if ($i['division_id'] == 1)
@@ -140,8 +138,8 @@
                                         @endif
                                         @if (auth()->user()->section_id != 24 && auth()->user()->section_id != 25 && auth()->user()->section_id != 26 && auth()->user()->section_id != 27)
                                             {{-- <small class="text-danger">* Creating / editing PPMP is now disabled</small> --}}
-                                            Created at: {{$i['ppmp_make_date']}}<br>
-                                            Updated at: {{$i['ppmp_update_date']}}<br>
+{{--                                            Created at: {{$i['ppmp_make_date']}}<br>--}}
+{{--                                            Updated at: {{$i['ppmp_update_date']}}<br>--}}
                                             {{-- @if ($i['pr_number'] !== null) disabled @endif --}}
                                             {{-- @if ($i['pr_number'] !== null) disabled @endif --}}
                                             <button type="button" id="edtPPMP_id"

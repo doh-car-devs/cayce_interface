@@ -11,7 +11,6 @@
                 {{-- hidden --}}
                 <th rowspan="2">Function Type</th>
                 <th rowspan="2"></th>
-                <th rowspan="2"></th>
                 {{-- hidden --}}
                 <th rowspan="2">Output Functions / Deliverables</th>
                 <th rowspan="2">Activities For Outputs</th>
@@ -22,6 +21,7 @@
                 <th rowspan="2">Program</th>
                 <th rowspan="2">Division</th>
                 <th rowspan="2">Division Head Comment</th>
+                <th rowspan="2">Action</th>
                 {{-- <th rowspan="2">Status</th> --}}
                 {{-- <th rowspan="2">Take Action</th> --}}
             </tr>

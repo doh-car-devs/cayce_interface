@@ -16,8 +16,6 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0" style="height:700;">
-        <div id="calendar"></div>
-        <i class="text-danger ml-3">*if calendar is empty, please contact ICT local 150</i>
     </div>
     <!-- /.card-body -->
     <div class="card-footer text-center">

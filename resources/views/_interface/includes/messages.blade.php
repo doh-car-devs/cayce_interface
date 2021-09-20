@@ -9,7 +9,7 @@
 @elseif(Session::has('success'))
 	<div class="alert alert-success" role="alert">
 		<h4 class="alert-heading">Success!</h4>
-		{{Session::get('success')}}
+		{{ Session::get('success') }}
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>

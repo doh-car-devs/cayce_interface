@@ -20,11 +20,11 @@
                     You are logged in!
                     {{-- {{session('user_links')}} --}}
                     <br>
-                        <strong>Links</strong>
-                        @foreach ($data['links'] as $link)
-                        <br>
-                            {{$link->name}}
-                        @endforeach 
+                    <strong>Links</strong>
+                    @foreach ($data['links'] as $link)
+                    <br>
+                        {{$link->name}}
+                    @endforeach
                 </div>
             </div>
         </div>

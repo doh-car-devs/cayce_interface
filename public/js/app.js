@@ -20440,9 +20440,9 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * Chart.js v2.9.3
+ * Chart.js v2.9.4
  * https://www.chartjs.org
- * (c) 2019 Chart.js Contributors
+ * (c) 2020 Chart.js Contributors
  * Released under the MIT License
  */
 (function (global, factory) {
@@ -22543,6 +22543,10 @@ if (typeof window !== 'undefined') {
 
 var chartjsColor = Color;
 
+function isValidKey(key) {
+	return ['__proto__', 'prototype', 'constructor'].indexOf(key) === -1;
+}
+
 /**
  * @namespace Chart.helpers
  */
@@ -22718,7 +22722,7 @@ var helpers = {
 		}
 
 		if (helpers.isObject(source)) {
-			var target = {};
+			var target = Object.create(source);
 			var keys = Object.keys(source);
 			var klen = keys.length;
 			var k = 0;
@@ -22739,6 +22743,12 @@ var helpers = {
 	 * @private
 	 */
 	_merger: function(key, target, source, options) {
+		if (!isValidKey(key)) {
+			// We want to ensure we do not copy prototypes over
+			// as this can pollute global namespaces
+			return;
+		}
+
 		var tval = target[key];
 		var sval = source[key];
 
@@ -22754,6 +22764,12 @@ var helpers = {
 	 * @private
 	 */
 	_mergerIf: function(key, target, source) {
+		if (!isValidKey(key)) {
+			// We want to ensure we do not copy prototypes over
+			// as this can pollute global namespaces
+			return;
+		}
+
 		var tval = target[key];
 		var sval = source[key];
 
@@ -24252,7 +24268,7 @@ helpers$1.extend(DatasetController.prototype, {
 	 */
 	_configure: function() {
 		var me = this;
-		me._config = helpers$1.merge({}, [
+		me._config = helpers$1.merge(Object.create(null), [
 			me.chart.options.datasets[me._type],
 			me.getDataset(),
 		], {
@@ -27522,7 +27538,8 @@ function updateDims(chartArea, params, layout) {
 		chartArea.h = newHeight;
 
 		// return true if chart area changed in layout's direction
-		return layout.horizontal ? newWidth !== chartArea.w : newHeight !== chartArea.h;
+		var sizes = layout.horizontal ? [newWidth, chartArea.w] : [newHeight, chartArea.h];
+		return sizes[0] !== sizes[1] && (!isNaN(sizes[0]) || !isNaN(sizes[1]));
 	}
 }
 
@@ -27826,7 +27843,7 @@ var platform_basic = {
 	}
 };
 
-var platform_dom = "/*\n * DOM element rendering detection\n * https://davidwalsh.name/detect-node-insertion\n */\n@keyframes chartjs-render-animation {\n\tfrom { opacity: 0.99; }\n\tto { opacity: 1; }\n}\n\n.chartjs-render-monitor {\n\tanimation: chartjs-render-animation 0.001s;\n}\n\n/*\n * DOM element resizing detection\n * https://github.com/marcj/css-element-queries\n */\n.chartjs-size-monitor,\n.chartjs-size-monitor-expand,\n.chartjs-size-monitor-shrink {\n\tposition: absolute;\n\tdirection: ltr;\n\tleft: 0;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\toverflow: hidden;\n\tpointer-events: none;\n\tvisibility: hidden;\n\tz-index: -1;\n}\n\n.chartjs-size-monitor-expand > div {\n\tposition: absolute;\n\twidth: 1000000px;\n\theight: 1000000px;\n\tleft: 0;\n\ttop: 0;\n}\n\n.chartjs-size-monitor-shrink > div {\n\tposition: absolute;\n\twidth: 200%;\n\theight: 200%;\n\tleft: 0;\n\ttop: 0;\n}\n";
+var platform_dom = "/*\r\n * DOM element rendering detection\r\n * https://davidwalsh.name/detect-node-insertion\r\n */\r\n@keyframes chartjs-render-animation {\r\n\tfrom { opacity: 0.99; }\r\n\tto { opacity: 1; }\r\n}\r\n\r\n.chartjs-render-monitor {\r\n\tanimation: chartjs-render-animation 0.001s;\r\n}\r\n\r\n/*\r\n * DOM element resizing detection\r\n * https://github.com/marcj/css-element-queries\r\n */\r\n.chartjs-size-monitor,\r\n.chartjs-size-monitor-expand,\r\n.chartjs-size-monitor-shrink {\r\n\tposition: absolute;\r\n\tdirection: ltr;\r\n\tleft: 0;\r\n\ttop: 0;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\toverflow: hidden;\r\n\tpointer-events: none;\r\n\tvisibility: hidden;\r\n\tz-index: -1;\r\n}\r\n\r\n.chartjs-size-monitor-expand > div {\r\n\tposition: absolute;\r\n\twidth: 1000000px;\r\n\theight: 1000000px;\r\n\tleft: 0;\r\n\ttop: 0;\r\n}\r\n\r\n.chartjs-size-monitor-shrink > div {\r\n\tposition: absolute;\r\n\twidth: 200%;\r\n\theight: 200%;\r\n\tleft: 0;\r\n\ttop: 0;\r\n}\r\n";
 
 var platform_dom$1 = /*#__PURE__*/Object.freeze({
 __proto__: null,
@@ -28534,7 +28551,7 @@ var core_scaleService = {
 	},
 	getScaleDefaults: function(type) {
 		// Return the scale defaults merged with the global settings so that we always use the latest ones
-		return this.defaults.hasOwnProperty(type) ? helpers$1.merge({}, [core_defaults.scale, this.defaults[type]]) : {};
+		return this.defaults.hasOwnProperty(type) ? helpers$1.merge(Object.create(null), [core_defaults.scale, this.defaults[type]]) : {};
 	},
 	updateScaleDefaults: function(type, additions) {
 		var me = this;
@@ -29609,7 +29626,7 @@ core_defaults._set('global', {
  * returns a deep copy of the result, thus doesn't alter inputs.
  */
 function mergeScaleConfig(/* config objects ... */) {
-	return helpers$1.merge({}, [].slice.call(arguments), {
+	return helpers$1.merge(Object.create(null), [].slice.call(arguments), {
 		merger: function(key, target, source, options) {
 			if (key === 'xAxes' || key === 'yAxes') {
 				var slen = source[key].length;
@@ -29649,9 +29666,9 @@ function mergeScaleConfig(/* config objects ... */) {
  * a deep copy of the result, thus doesn't alter inputs.
  */
 function mergeConfig(/* config objects ... */) {
-	return helpers$1.merge({}, [].slice.call(arguments), {
+	return helpers$1.merge(Object.create(null), [].slice.call(arguments), {
 		merger: function(key, target, source, options) {
-			var tval = target[key] || {};
+			var tval = target[key] || Object.create(null);
 			var sval = source[key];
 
 			if (key === 'scales') {
@@ -29668,7 +29685,7 @@ function mergeConfig(/* config objects ... */) {
 }
 
 function initConfig(config) {
-	config = config || {};
+	config = config || Object.create(null);
 
 	// Do NOT use mergeConfig for the data object because this method merges arrays
 	// and so would change references to labels and datasets, preventing data updates.
@@ -31649,6 +31666,8 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 	var widths = [];
 	var heights = [];
 	var offsets = [];
+	var widestLabelSize = 0;
+	var highestLabelSize = 0;
 	var i, j, jlen, label, tickFont, fontString, cache, lineHeight, width, height, nestedLabel, widest, highest;
 
 	for (i = 0; i < length; ++i) {
@@ -31676,11 +31695,13 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 		widths.push(width);
 		heights.push(height);
 		offsets.push(lineHeight / 2);
+		widestLabelSize = Math.max(width, widestLabelSize);
+		highestLabelSize = Math.max(height, highestLabelSize);
 	}
 	garbageCollect(caches, length);
 
-	widest = widths.indexOf(Math.max.apply(null, widths));
-	highest = heights.indexOf(Math.max.apply(null, heights));
+	widest = widths.indexOf(widestLabelSize);
+	highest = heights.indexOf(highestLabelSize);
 
 	function valueAt(idx) {
 		return {
@@ -99855,9 +99876,8 @@ __webpack_require__(/*! ./myScripts */ "./resources/js/myScripts.js"); // requir
 |
 |
 */
+// require('./wfp');
 
-
-__webpack_require__(/*! ./wfp */ "./resources/js/wfp.js");
 
 __webpack_require__(/*! ./bac */ "./resources/js/bac.js");
 
@@ -100163,9 +100183,13 @@ $(document).ready(function () {
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -100222,6 +100246,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+
 
 /***/ }),
 
@@ -100761,1022 +100787,6 @@ $(document).ready(function () {
       $('#show_hide_password i').removeClass("fa-eye-slash");
       $('#show_hide_password i').addClass("fa-eye");
     }
-  }); // $(".drop-hov").mouseenter(function() { $(this).click() });
-
-  $('.drop-hov').bind('mouseover', function () {
-    alert('sdfsdf');
-    /*DO WHAT YOU WANT HERE*/
-  });
-});
-
-/***/ }),
-
-/***/ "./resources/js/wfp.js":
-/*!*****************************!*\
-  !*** ./resources/js/wfp.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
-    Axios = _require["default"];
-
-$(document).ready(function () {
-  $('#ppmp_genDesc').select2({
-    theme: 'bootstrap4',
-    // tags: true,
-    // multiple: true,
-    allowClear: true,
-    // tokenSeparators: [',', ' '],
-    minimumInputLength: 4,
-    minimumResultsForSearch: 10,
-    language: {
-      noResults: function noResults() {
-        return 'Item Not Found<button class="btn btn-block btn-outline-danger btn-xs" id="no-results-btn" data-toggle="collapse" data-target="#collapseExample">Click here to request NEW item</a>';
-      }
-    },
-    escapeMarkup: function escapeMarkup(markup) {
-      return markup;
-    },
-    ajax: {
-      url: "http://192.168.224.68:2019/api/ppmp/items",
-      dataType: "json",
-      type: "GET",
-      data: function data(params) {
-        // console.log(params.term);
-        var newparams = params.term.replace(/ /g, "%20"); // console.log(newparams);
-
-        var queryParameters = {
-          term: newparams || ''
-        }; // console.log(queryParameters)
-        // console.log(params.term)
-
-        return queryParameters;
-      },
-      processResults: function processResults(data) {
-        // console.log(data)
-        return {
-          results: $.map(data.items, function (item) {
-            return {
-              id: item.id,
-              text: item.text,
-              code: item.code,
-              price: item.price,
-              unitname: item.unitname,
-              unit: item.unit,
-              branch: item.branch
-            };
-          })
-        };
-      } // cache: true
-
-    }
-  });
-  $('#ppmp_genDesc_edit').select2({
-    theme: 'bootstrap4',
-    allowClear: true,
-    minimumInputLength: 4,
-    minimumResultsForSearch: 10,
-    language: {
-      noResults: function noResults() {
-        return 'Item Not Found<button class="btn btn-block btn-outline-danger btn-xs" id="no-results-btn" data-toggle="collapse" data-target="#collapseExample">Click here to request NEW item</a>';
-      }
-    },
-    escapeMarkup: function escapeMarkup(markup) {
-      return markup;
-    },
-    ajax: {
-      url: "http://192.168.224.68:2019/api/ppmp/items",
-      dataType: "json",
-      type: "GET",
-      data: function data(params) {
-        console.log(params.term);
-        var newparams = params.term.replace(/ /g, "%20");
-        console.log(newparams);
-        var queryParameters = {
-          term: newparams || ''
-        }; // console.log(queryParameters)
-        // console.log(params.term)
-
-        return queryParameters;
-      },
-      processResults: function processResults(data) {
-        // console.log(data)
-        return {
-          results: $.map(data.items, function (item) {
-            return {
-              id: item.id,
-              text: item.text,
-              code: item.code,
-              price: item.price,
-              unitname: item.unitname,
-              unit: item.unit,
-              branch: item.branch
-            };
-          })
-        };
-      } // cache: true
-
-    }
-  }); // on select of item
-
-  $("#ppmp_genDesc").on('select2:select', function (e) {
-    // console.log(e.params.data)
-    // alert('sdfdfdf')
-    // console.log(e.params.price)
-    $('#ppmp_abc1').val(e.params.data.price);
-    $('#ppmp_unit1').val(e.params.data.unitname);
-    $('#ppmp_branch1').val(e.params.data.branch);
-    $('#ppmp_id1').val(e.params.data.id);
-    $('#ppmp_item_name1').val(e.params.data.text);
-    $('#ppmp_price1').val(e.params.data.price);
-    $('#ppmp_unit11').val(e.params.data.unit);
-  }); // on clear of item
-
-  $("#ppmp_genDesc").on('select2:clear', function (e) {
-    $('#ppmp_abc1').val(0);
-    $('#ppmp_unit1').val('');
-    $('#ppmp_estbudget').val(0);
-  }); // on select of item
-
-  $("#ppmp_genDesc_edit").on('select2:select', function (e) {
-    console.log(e.params.data);
-    $('#ppmp_abc3').val(e.params.data.price);
-    $('#ppmp_unit3').val(e.params.data.unitname);
-    $('#ppmp_branch3').val(e.params.data.branch);
-    $('#ppmp_id2').val(e.params.data.id);
-    $('#ppmp_item_name3').val(e.params.data.text);
-    $('#ppmp_price3').val(e.params.data.price);
-    $('#ppmp_unit13').val(e.params.data.unit);
-  }); // on clear of item
-
-  $("#ppmp_genDesc_edit").on('select2:clear', function (e) {
-    $('#ppmp_abc3').val(0);
-    $('#ppmp_unit3').val('');
-    $('#ppmp_estbudget').val(0);
-  });
-});
-$(document).ready(function () {
-  $('#wfpDeliverable').select2({
-    theme: 'bootstrap4',
-    allowClear: true,
-    tokenSeparators: [',', ' '],
-    minimumInputLength: 2,
-    minimumResultsForSearch: 10,
-    language: {
-      noResults: function noResults() {
-        return 'No Result/s Found<button class="btn btn-block btn-outline-danger btn-xs" id="no-results-btn" data-toggle="modal" data-target="#edit2" onclick="pastevalue()">Click here to add new</a>';
-      }
-    },
-    escapeMarkup: function escapeMarkup(markup) {
-      return markup;
-    },
-    ajax: {
-      url: "http://192.168.224.68:2019/api/wfp/deliverableList",
-      dataType: "json",
-      type: "GET",
-      data: function data(params) {
-        var queryParameters = {
-          term: params.term || 1
-        };
-        return queryParameters;
-      },
-      processResults: function processResults(data) {
-        return {
-          results: $.map(data.items, function (item) {
-            return {
-              id: item.text,
-              text: item.text
-            };
-          })
-        };
-      },
-      cache: true
-    }
-  });
-}); // DATATABLE
-
-$(document).ready(function () {
-  var maindivisionwfptablevar = $('#maindivisionwfptable').DataTable({
-    "scrollX": true,
-    "ordering": true,
-    // "responsive": true,
-    "autoWidth": true,
-    // dom: 'Bfrtlip',
-    buttons: [{
-      extend: 'copyHtml5',
-      exportOptions: {
-        columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] // columns: [ 0, ':visible' ]
-
-      }
-    }, 'colvis'],
-    "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
-    "columnDefs": [// {
-      //     "visible": true,
-      //     "targets": 0
-      // },
-      // {
-      //     'targets': 1,
-      //     'checkboxes': {
-      //         'selectRow': true
-      //     }
-      // }
-    ],
-    'select': {
-      'style': 'multi'
-    },
-    "order": [[0, "asc"]],
-    "rowsGroup": [0, 2],
-    "displayLength": 50 // "createdRow": function (row, data, dataIndex) {
-    //     if (data[0] == "A. Strategic Functions") {
-    //         $(row).addClass('active');
-    //     }
-    //     if (data[0] == "B. Core Functions") {
-    //         $(row).addClass('active');
-    //     }
-    //     if (data[0] == "C. Support Functions") {
-    //         $(row).addClass('active');
-    //     }
-    // },
-
-  });
-  new $.fn.dataTable.Buttons(maindivisionwfptablevar, {
-    buttons: [{
-      extend: 'copy',
-      className: 'btn btn-tool btn-xs btn-default text-warning font-weight-bold',
-      text: 'COPY SELECTED ROWS',
-      exportOptions: {
-        columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-      }
-    }, {
-      extend: 'excel',
-      className: 'btn btn-tool btn-xs btn-default text-dark',
-      text: 'Export Excel File',
-      title: 'Excel'
-    }, {
-      extend: 'pdf',
-      className: 'btn btn-tool btn-xs btn-default text-dark',
-      text: 'Export PDF File',
-      title: 'PDF'
-    }]
-  });
-  maindivisionwfptablevar.buttons(1, null).container().appendTo('#dvsnwfp');
-});
-$(document).ready(function () {
-  var groupColumn = 0;
-  var globalTitle = 'WFP and PPMP Tables for {{auth()->user()->name_family}}, {{auth()->user()->name}} {{auth()->user()->name_middle}}';
-
-  if (typeof globaldisplayLength === 'undefined') {
-    globaldisplayLength = 10;
-  }
-
-  var table_wfp = $('#mainwfptable').DataTable({
-    dom: "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-    "scrollX": true,
-    "ordering": true,
-    "info": true,
-    // "responsive": true,
-    "autoWidth": true,
-    buttons: [],
-    "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-    "columnDefs": [{
-      "visible": true,
-      "targets": groupColumn
-    }, {
-      'targets': 1,
-      'checkboxes': {
-        'selectRow': true
-      }
-    }],
-    'select': {
-      'style': 'multi'
-    },
-    "order": [[0, "asc"]],
-    "rowsGroup": [0, 2],
-    "displayLength": globaldisplayLength,
-    "createdRow": function createdRow(row, data, dataIndex) {
-      if (data[0] == "A. Strategic Functions") {
-        $(row).addClass('active');
-      }
-
-      if (data[0] == "B. Core Functions") {
-        $(row).addClass('active');
-      }
-
-      if (data[0] == "C. Support Functions") {
-        $(row).addClass('active');
-      }
-    },
-    "footerCallback": function footerCallback(row, data, start, end, display) {
-      var api = this.api(),
-          data; // Remove the formatting to get integer data for summation
-
-      var intVal = function intVal(i) {
-        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
-      }; // Total over all pages
-
-
-      total = api.column(11).data().reduce(function (a, b) {
-        return intVal(a) + intVal(b);
-      }, 0); // Total over this page
-
-      pageTotal = api.column(11, {
-        page: 'current'
-      }).data().reduce(function (a, b) {
-        return intVal(a) + intVal(b);
-      }, 0); // Update footer
-
-      $(api.column(11).footer()).html('₱ ' + pageTotal.toLocaleString(undefined, {
-        minimumFractionDigits: 2
-      }));
-      $('tr:eq(1) th:eq(1)', api.table().footer()).html('₱ ' + total.toLocaleString(undefined, {
-        minimumFractionDigits: 2
-      }));
-    }
-  });
-  table_wfp.on('page.dt', function () {
-    $('html, body').animate({
-      scrollTop: $(".dataTables_wrapper").offset().top
-    }, 'slow');
-  }); // var table_wfp_consolidated = $('#mainwfptableconsolidated').DataTable({
-  //     dom: "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" +
-  //     "<'row'<'col-sm-12'tr>>" +
-  //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-  //     "scrollX": true,
-  //     "ordering": true,
-  //     "info": true,
-  //     // "responsive": true,
-  //     "autoWidth": true,
-  //     buttons: [
-  //     ],
-  //     "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-  //     "columnDefs": [
-  //         {
-  //             "visible": true,
-  //             "targets": groupColumn
-  //         },
-  //         {
-  //             'targets': 1,
-  //             'checkboxes': {
-  //                 'selectRow': true
-  //             }
-  //         }
-  //     ],
-  //     'select': {
-  //         'style': 'multi'
-  //      },
-  //     "order": [[0, "asc" ]],
-  //     "rowsGroup": [0,2],
-  //     "displayLength": globaldisplayLength,
-  //     "createdRow": function (row, data, dataIndex) {
-  //         if (data[0] == "A. Strategic Functions") {
-  //             $(row).addClass('active');
-  //         }
-  //         if (data[0] == "B. Core Functions") {
-  //             $(row).addClass('active');
-  //         }
-  //         if (data[0] == "C. Support Functions") {
-  //             $(row).addClass('active');
-  //         }
-  //     },
-  //     "footerCallback" : function (row, data, start, end, display){
-  //         var api = this.api(), data;
-  //         // Remove the formatting to get integer data for summation
-  //         var intVal = function ( i ) {
-  //             return typeof i === 'string' ?
-  //                 i.replace(/[\$,]/g, '')*1 :
-  //                 typeof i === 'number' ?
-  //                     i : 0;
-  //         };
-  //         // Total over all pages
-  //         total = api
-  //         .column( 10 )
-  //         .data()
-  //         .reduce( function (a, b) {
-  //             return intVal(a) + intVal(b);
-  //         }, 0 );
-  //         // Total over this page
-  //         pageTotal = api
-  //             .column( 10, { page: 'current'} )
-  //             .data()
-  //             .reduce( function (a, b) {
-  //                 return intVal(a) + intVal(b);
-  //             }, 0 );
-  //         // Update footer
-  //         $( api.column( 11 ).footer() ).html(
-  //             '₱ '+pageTotal.toLocaleString(undefined, {minimumFractionDigits: 2})
-  //         );
-  //         $('tr:eq(1) th:eq(1)', api.table().footer()).html('₱ '+total.toLocaleString(undefined, {minimumFractionDigits: 2}));
-  //     },
-  // });
-
-  var table_wfp_consolidated = $('#mainwfptableconsolidated').DataTable({
-    dom: "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-    "scrollX": true,
-    "ordering": true,
-    "info": true,
-    // "responsive": true,
-    "autoWidth": true,
-    buttons: [],
-    "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
-    "columnDefs": [{
-      "visible": true,
-      "targets": groupColumn
-    }, {
-      'targets': 1,
-      'checkboxes': {
-        'selectRow': true
-      }
-    }],
-    'select': {
-      'style': 'multi'
-    },
-    "order": [[1, "asc"]],
-    "rowsGroup": [2],
-    "displayLength": 10,
-    "createdRow": function createdRow(row, data, dataIndex) {
-      if (data[0] == "A. Strategic Functions") {
-        $(row).addClass('active');
-      }
-
-      if (data[0] == "B. Core Functions") {
-        $(row).addClass('active');
-      }
-
-      if (data[0] == "C. Support Functions") {
-        $(row).addClass('active');
-      }
-    },
-    "footerCallback": function footerCallback(row, data, start, end, display) {
-      var api = this.api(),
-          data; // Remove the formatting to get integer data for summation
-
-      var intVal = function intVal(i) {
-        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
-      }; // Total over all pages
-
-
-      total = api.column(10).data().reduce(function (a, b) {
-        return intVal(a) + intVal(b);
-      }, 0); // Total over this page
-
-      pageTotal = api.column(10, {
-        page: 'current'
-      }).data().reduce(function (a, b) {
-        return intVal(a) + intVal(b);
-      }, 0); // Update footer
-
-      $(api.column(2).footer()).html('₱ ' + pageTotal.toLocaleString(undefined, {
-        minimumFractionDigits: 2
-      }));
-      $('tr:eq(1) th:eq(1)', api.table().footer()).html('₱ ' + total.toLocaleString(undefined, {
-        minimumFractionDigits: 2
-      }));
-    }
-  });
-  table_wfp_consolidated.on('page.dt', function () {
-    $('html, body').animate({
-      scrollTop: $(".dataTables_wrapper").offset().top
-    }, 'slow');
-  }); // Handle form submission event
-
-  $('#frm-wfp').on('submit', function (e) {
-    var ans = window.confirm("You are about to generate Office Consolidated WFP. Press OK to continue");
-
-    if (ans) {
-      var form = this;
-      var rows_selected = table_wfp.column(1).checkboxes.selected(); // Iterate over all selected checkboxes
-
-      $.each(rows_selected, function (index, rowId) {
-        // Create a hidden element
-        $(form).append($('<input>').attr('type', 'hidden').attr('name', 'value-' + index).val(rowId));
-      });
-      $('#redirect_value').val(rows_selected.join("yyy")); // Output form data to a console
-
-      $('#example-console-rows').text(rows_selected.join(","));
-      $('#example-console-form').text($(form).serialize());
-    } else {
-      e.preventDefault();
-    }
-  });
-  $('#frm-wfp123').on('submit', function (e) {
-    alert('sdfsdf');
-    var ans = window.confirm("You are about to generate Office Consolidated WFP. Press OK to continue");
-
-    if (ans) {
-      var form = this;
-      var rows_selected = table_wfp_consolidated.column(1).checkboxes.selected(); // Iterate over all selected checkboxes
-
-      $.each(rows_selected, function (index, rowId) {
-        // Create a hidden element
-        $(form).append($('<input>').attr('type', 'hidden').attr('name', 'value-' + index).val(rowId));
-      });
-      $('#redirect_value').val(rows_selected.join("yyy")); // Output form data to a console
-
-      $('#example-console-rows').text(rows_selected.join(","));
-      $('#example-console-form').text($(form).serialize());
-    } else {
-      e.preventDefault();
-    }
-  }); // Handle form submission event
-  //    $('#frmdvsn-wfp').on('submit', function(e){
-  //     var form = this;
-  //     var rows_selected = table_wfp.column(1).checkboxes.selected();
-  //     // Iterate over all selected checkboxes
-  //     $.each(rows_selected, function(index, rowId){
-  //        // Create a hidden element
-  //        $(form).append(
-  //            $('<input>')
-  //               .attr('type', 'hidden')
-  //               .attr('name', 'value-'+index)
-  //               .val(rowId)
-  //        );
-  //     });
-  //       $('#redirect_value').val(rows_selected.join("yyy"));
-  //     // Output form data to a console
-  //     $('#example-console-rows').text(rows_selected.join(","));
-  //     $('#example-console-form').text($(form).serialize());
-  //  });
-  // UNCOMMENT FOR ADDING BUTTON LIKE PRINT/COPY/PDF
-  // new $.fn.dataTable.Buttons( table, {
-  //     buttons: [
-  //         { extend: 'copy', className: 'btn btn-tool btn-xs btn-default text-dark'}, { extend: 'excel', className: 'btn btn-tool btn-xs btn-default text-dark', text: 'Export Excel File', title: globalTitle},
-  //         { extend: 'pdf', className: 'btn btn-tool btn-xs btn-default text-dark', text: 'Export PDF File', title: globalTitle}
-  //     ]
-  // } );
-  // table.buttons( 1, null ).container().appendTo('#wfptools'
-  // );
-  // edit wfp
-
-  $(document).ready(function () {
-    $('table[id="mainwfptable"]').on('click', 'button[id="edt_id"]', function () {
-      var value = $(this).attr('data-id');
-      var strArray = value.split("||");
-      $('#function2').val(strArray[0]);
-      $('#activities2').val(strArray[1]);
-      $('#timeframe2').val(strArray[2]);
-      $('#q12').val(strArray[3]);
-      $('#q22').val(strArray[4]);
-      $('#q32').val(strArray[4]);
-      $('#q42').val(strArray[6]);
-      $('#item2').val(strArray[7]);
-      $('#cost2').val(strArray[8]);
-      $('#fundSource_id2').val(strArray[9]).trigger("change");
-      console.log(strArray); // $('#function_type2').val(strArray[10]);
-
-      $('#function_type2').val(strArray[11]);
-      $('#selected-year2').val(strArray[12]);
-      $('#deliverable_id2').val(strArray[13]);
-      $('#resp_person_edt').val(strArray[14]).trigger("change");
-    });
-    $('table[id="mainwfptable"]').on('click', 'button[id="add_ppmp"]', function () {
-      var value = $(this).attr('data-id');
-      var strArray = value.split("||"); // $("#wfp_id3").select2('data', {id: 39});
-
-      $("#wfp_id3").val([value, "selected"]).trigger("change");
-      var availamount = $(this).attr('data-cost'); // window.confirm("You have ₱"+ Number(availamount).toLocaleString() + ' unallocated funds.')
-
-      $('#estbudget3').text(numeral(availamount).format('0,0.00'));
-      $('#ppmp_estbudget').attr('max', availamount); // $('#wfp_id3').val(value);
-      // alert(value)
-      // $('#activities2').val(strArray[1]);
-      // $('#timeframe2').val(strArray[2]);
-      // $('#q12').val(strArray[3]);
-      // $('#q22').val(strArray[4]);
-      // $('#q32').val(strArray[4]);
-      // $('#q42').val(strArray[6]);
-      // $('#item2').val(strArray[7]);
-      // $('#cost2').val(strArray[8]);
-      // $('#fundSource_id2').val(strArray[9]);
-      // console.log(strArray);
-      // $('#function_type2').val(strArray[11]);
-      // $('#selected-year2').val(strArray[12]);
-      // $('#deliverable_id2').val(strArray[13]);
-    });
-    $('table[id="mainwfptable"]').on('click', 'button[id="dup_id"]', function () {
-      var value = $(this).attr('data-id');
-      var strArray = value.split("||"); // $("#wfp_id3").select2('data', {id: 39});
-      // $("#wfp_id3").val([value, "selected"]).trigger("change");
-      // var availamount = $(this).attr('data-cost');
-      // // window.confirm("You have ₱"+ Number(availamount).toLocaleString() + ' unallocated funds.')
-      // $('#estbudget3').text(numeral(availamount).format('0,0.00'));
-      // $('#ppmp_estbudget').attr('max', availamount);
-      // // $('#wfp_id3').val(value);
-      // // alert(value)
-      // // $('#activities2').val(strArray[1]);
-      // // $('#timeframe2').val(strArray[2]);
-      // // $('#q12').val(strArray[3]);
-      // // $('#q22').val(strArray[4]);
-      // // $('#q32').val(strArray[4]);
-      // // $('#q42').val(strArray[6]);
-      // // $('#item2').val(strArray[7]);
-      // // $('#cost2').val(strArray[8]);
-      // // $('#fundSource_id2').val(strArray[9]);
-      // // console.log(strArray);
-      // // $('#function_type2').val(strArray[11]);
-      // // $('#selected-year2').val(strArray[12]);
-
-      $('#deliverable_id2').val(strArray[13]); // alert(strArray[13])
-
-      Axios.post('/api/services/redirect/redirectAPI/', {
-        redirect_year: '2021',
-        myid: strArray[13]
-      }).then(function (response) {
-        crossDomain: true;
-
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      }).then(function () {
-        console.log('done');
-      });
-    });
-    $('table[id="mainwfptable"]').on('click', 'button[id="duplicate_wfp"]', function () {
-      var value = $(this).attr('data-id');
-      var strArray = value.split("||");
-      $('#function2').val(strArray[0]);
-      $('#activities2').val(strArray[1]);
-      $('#timeframe2').val(strArray[2]);
-      $('#q12').val(strArray[3]);
-      $('#q22').val(strArray[4]);
-      $('#q32').val(strArray[4]);
-      $('#q42').val(strArray[6]);
-      $('#item2').val(strArray[7]);
-      $('#cost2').val(strArray[8]);
-      $('#fundSource_id2').val(strArray[9]);
-      console.log(strArray[9]); // $('#function_type2').val(strArray[10]);
-
-      $('#function_type2').val(strArray[11]);
-      $('#selected-year2').val(strArray[12]);
-      $('#deliverable_id2').val(strArray[13]);
-    });
-  });
-  var tableppmp = $('#mainppmptable').DataTable({
-    "dom": "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-    "scrollX": true,
-    "ordering": true,
-    "info": true,
-    // "responsive": true,
-    "autoWidth": true,
-    buttons: [],
-    "lengthMenu": [[5, 10, 20, 30, 50, 100, -1], [5, 10, 20, 30, 50, 100, "All"]],
-    "columnDefs": [{
-      "visible": false,
-      "targets": groupColumn
-    }, {
-      'targets': 1,
-      'checkboxes': {
-        'selectRow': true
-      }
-    }],
-    'select': {
-      'style': 'multi'
-    },
-    "order": [[groupColumn, 'asc']],
-    "displayLength": 20,
-    "drawCallback": function drawCallback(settings) {
-      var api = this.api();
-      var rows = api.rows({
-        page: 'current'
-      }).nodes();
-      var last = null;
-      api.column(groupColumn, {
-        page: 'current'
-      }).data().each(function (group, i) {
-        if (last !== group) {
-          $(rows).eq(i).before('<tr class="group bg-gray color-palette h4 "><td colspan="21">' + group + '</td></tr>');
-          last = group;
-        }
-      });
-    },
-    "footerCallback": function footerCallback(row, data, start, end, display) {
-      var api = this.api(),
-          data; // Remove the formatting to get integer data for summation
-
-      var intVal = function intVal(i) {
-        return typeof i === 'string' ? i.replace(/[\₱,]/g, '') * 1 : typeof i === 'number' ? i : 0;
-      }; // Total over all pages
-
-
-      total = api.column(7).data().reduce(function (a, b) {
-        return intVal(a) + intVal(b);
-      }, 0); // Total over this page
-
-      pageTotal = api.column(7, {
-        page: 'current'
-      }).data().reduce(function (a, b) {
-        return intVal(a) + intVal(b);
-      }, 0); // Update footer
-
-      $(api.column(6).footer()).html('₱ ' + pageTotal.toLocaleString(undefined, {
-        minimumFractionDigits: 2
-      }));
-      console.log(pageTotal);
-      $('tr:eq(1) th:eq(1)', api.table().footer()).html('₱ ' + total.toLocaleString(undefined, {
-        minimumFractionDigits: 2
-      }));
-    }
-  });
-  tableppmp.on('page.dt', function () {
-    $('html, body').animate({
-      scrollTop: $(".dataTables_wrapper").offset().top
-    }, 'slow');
-  });
-  $('#frm-ppmp').on('submit', function (e) {
-    var form = this;
-    var rows_selected = tableppmp.column(1).checkboxes.selected(); // Iterate over all selected checkboxes
-
-    $.each(rows_selected, function (index, rowId) {
-      // Create a hidden element
-      $(form).append($('<input>').attr('type', 'hidden').attr('name', 'value-' + index).val(rowId));
-    });
-    $('#redirect_value').val(rows_selected.join("yyy")); // Output form data to a console
-
-    $('#example-console-rows').text(rows_selected.join(","));
-    $('#example-console-form').text($(form).serialize());
-  }); // UNCOMMENT FOR ADDING BUTTON LIKE PRINT/COPY/PDF
-  // new $.fn.dataTable.Buttons( table, {
-  //     buttons: [
-  //         { extend: 'copy', className: 'btn btn-tool btn-xs btn-default text-dark'}, { extend: 'excel', className: 'btn btn-tool btn-xs btn-default text-dark', text: 'Export Excel File', title: globalTitle},
-  //         { extend: 'pdf', className: 'btn btn-tool btn-xs btn-default text-dark', text: 'Export PDF File' , title: globalTitle}
-  //     ]
-  // } );
-  // table.buttons( 1, null ).container().appendTo('#ppmptools'
-  // );
-
-  $('table[id="mainppmptable"]').on('click', 'button[id="edtPPMP_id"]', function () {
-    var value = $(this).attr('data-id');
-    var strArray = value.split("||"); // $('.modal-content #wfp_id').val(strArray[0]);
-    // alert(strArray[0]);
-
-    $(".modal-content #wfp_id2").val([strArray[0], "selected"]).trigger("change"); // $(".modal-content #ppmp_genDesc_edit").val([strArray[1], "selected"]).trigger("change");
-
-    $('.modal-content #ppmp_genDesc_edit').val(strArray[1]);
-    $('.modal-content #ppmp_genDesc_editinput').val(strArray[1]);
-    $('.modal-content #ppmp_qty2').val(strArray[2]);
-    $('.modal-content #ppmp_unit2').val(strArray[3]);
-    $('.modal-content #ppmp_abc2').val(strArray[4]);
-    $('.modal-content #ppmp_estbudget').val(strArray[4]);
-    $(".modal-content #ppmp_mop").val([strArray[6], "selected"]).trigger("change"); // $('.modal-content #ppmp_mop').val(strArray[6]);
-
-    $('.modal-content #milestones1').val(strArray[7]);
-    $('.modal-content #milestones2').val(strArray[8]);
-    $('.modal-content #milestones3').val(strArray[9]);
-    $('.modal-content #milestones4').val(strArray[10]);
-    $('.modal-content #milestones5').val(strArray[11]);
-    $('.modal-content #milestones6').val(strArray[12]);
-    $('.modal-content #milestones7').val(strArray[13]);
-    $('.modal-content #milestones8').val(strArray[14]);
-    $('.modal-content #milestones9').val(strArray[15]);
-    $('.modal-content #milestones10').val(strArray[16]);
-    $('.modal-content #milestones11').val(strArray[17]);
-    $('.modal-content #milestones12').val(strArray[18]);
-    $('.modal-content #ppmp_entry_id').val(strArray[21]);
-    var qtyxabc2 = parseInt($('.modal-content #ppmp_qty2').val()) * parseFloat($('.modal-content #ppmp_abc2').val()); // alert(qtyxabc2);
-
-    console.log(qtyxabc2.toFixed(2));
-    $('.modal-content #ppmp_estbudget_edit').val(qtyxabc2.toFixed(2));
-    $('.modal-content #ppmp_estbudget_edit2').val(qtyxabc2.toFixed(2));
-  });
-  $('button[id="calc_target_wfp"]').on('click', function () {
-    var sum = parseInt($('#q1').val()) + parseInt($('#q2').val()) + parseInt($('#q3').val()) + parseInt($('#q4').val());
-    $('#cost').val(sum);
-  });
-  $('.milestoneclass').on('input', function () {
-    var total = 0;
-    $('.milestoneclass').each(function (key, variable) {
-      total = total + parseInt($(variable).val());
-    });
-    console.log(total);
-    $('#ppmp_qty').val(total);
-    var qtyxabc = parseInt($('#ppmp_qty').val()) * parseFloat($('#ppmp_abc1').val());
-    $('#ppmp_estbudget').val(qtyxabc);
-  });
-
-  function calcmilestone() {
-    alert('hello');
-  }
-
-  $('button[id="qtyabc"]').on('click', function () {
-    var qtyxabc = parseInt($('#ppmp_qty').val()) * parseFloat($('#ppmp_abc1').val());
-    $('#ppmp_estbudget').val(qtyxabc);
-    var qtyxabc2 = parseInt($('.modal-content #ppmp_qty').val()) * parseFloat($('.modal-content #ppmp_abc3').val()); // alert($('.modal-content #ppmp_abc3').val());
-
-    $('.modal-content #ppmp_estbudget_edit').val(qtyxabc2);
-  });
-  $('button[id="qtyabc2"]').on('click', function () {
-    var qtyxabc = parseInt($('#ppmp_qty2').val()) * parseFloat($('#ppmp_abc2').val());
-    var qtyxabc3 = parseInt($('#ppmp_qty3').val()) * parseFloat($('#ppmp_abc3').val()); // alert(qtyxabc3)
-
-    $('#ppmp_estbudget_edit2').val(qtyxabc);
-    $('#ppmp_estbudget_edit3').val(qtyxabc3);
-    var qtyxabc2 = parseInt($('.modal-content #ppmp_qty').val()) * parseFloat($('.modal-content #ppmp_abc3').val()); // alert($('.modal-content #ppmp_abc3').val());
-
-    $('.modal-content #ppmp_estbudget_edit').val(qtyxabc2);
-  });
-  $('button[id="searchguide"]').on('click', function () {
-    alert('hello'); // var qtyxabc = parseInt($('#ppmp_qty').val()) * parseFloat($('#ppmp_abc1').val())
-
-    $('#ppmp_genDesc').val('qtyxabc');
-  });
-  $('#ppmp_qty').on('keyup', function () {
-    var qtyxabc = parseInt($('#ppmp_qty').val()) * parseFloat($('#ppmp_abc1').val());
-    $('#ppmp_estbudget').val(qtyxabc);
-  }); //Selecting fund source and auto select program
-
-  $("#fundSource_id").on('select2:select', function () {
-    var programid = $(this).find(':selected').attr('data-program');
-    $('#wfpProgram').val(programid);
-  });
-  $("#fundSource_id").on('select2:select', function () {
-    var type = $(this).find(':selected').attr('data-fundtype');
-    var wfpallocate = type == 'SAA' || type == 'SARO' || type == 'Trust Funds' ? numeral($(this).find(':selected').attr('data-availableamount')).format('0,0.00') : $(this).find(':selected').attr('data-availableNEP');
-    $('#viewperdev3').text(wfpallocate);
-    $('#cost').attr('max', wfpallocate);
-  });
-  $("#wfp_id1").on('select2:select', function () {
-    var availamount = $(this).find(':selected').attr('data-cost');
-    alert(availamount);
-    $('#estbudget1').text(numeral(availamount).format('0,0.00'));
-    $('#ppmp_estbudget').attr('max', availamount);
-  });
-  $("#wfp_id2").on('select2:select', function () {
-    var availamount = $(this).find(':selected').attr('data-cost');
-    $('#estbudget2').text(numeral(availamount).format('0,0.00'));
-    $('#ppmp_estbudget').attr('max', availamount);
-  });
-  $("#wfp_id3").on('select2:change', function () {
-    alert('yown wfpid3');
-    var availamount = $(this).find(':selected').attr('data-cost');
-    $('#estbudget3').text(numeral(availamount).format('0,0.00'));
-    $('#ppmp_estbudget').attr('max', availamount);
-  }); // uncomment for adding button on filter
-  // $(" div.dataTables_filter").append('<button class="btn btn-secondary btn-sm" id="lock-search-btn">Lock Search</button>');
-  // $("#lock-search-btn").on('click', function(e){
-  //     e.preventDefault();
-  //     alert('hello')
-  // });
-  // $("select.custom-select-sm").append('<button class="btn btn-secondary btn-sm" id="lock-search-btn">Lock Search</button>');
-
-  $("select.custom-select-sm").on('change', function (e) {
-    e.preventDefault();
-    var info = table_wfp.page.info();
-    var selectedLength = info.length;
-    $('#tablelen').val(selectedLength); // $('form#formlength').submit;
-
-    document.getElementById('formlength').submit();
-    console.log(selectedLength);
-  });
-  var PeekPPMP; // PeekPPMP = $('#peek_mainppmptable').DataTable({
-  //     // processing: true,
-  //     // // serverSide: true,
-  //     // ajax: {
-  //     //     url: 'http://192.168.224.68:2019/api/systemadmin/getAllUsers',
-  //     //     type: 'GET',
-  //     //     error: function (xhr, error, code)
-  //     //     {
-  //     //         data = []
-  //     //     },
-  //     // },
-  //     data: [],
-  //     columns:[
-  //         {data: 'names'},
-  //         {data: 'designation'},
-  //         {data: 'division_name'},
-  //         {data: 'section_name'},
-  //         // {data: 'namess', name: 'Name'},
-  //         // {data: 'designation', name: 'Designation'},
-  //         // {data: 'division_name', name: 'Division'},
-  //         // {data: 'section_name', name: 'Section'},
-  //     ],
-  //     rowCallback: function (row, data){
-  //         // console.log(data)
-  //         alert('ssdf')
-  //     },
-  //     filter: false,
-  //     info: false,
-  //     ordering: false,
-  //     processing: true,
-  //     retrieve: true,
-  //     paging: false,
-  //     searching: false,
-  //     order: [1, 'asc'],
-  //     // ordering: true,
-  //     // "order": [[0, "asc" ]],
-  //     // 'select': {
-  //     //     'style': 'multi'
-  //     //  },
-  //     // "lengthMenu": [[10,20,50,100, -1], [10,20,50,100, "All"]],
-  //     // "displayLength": 20,
-  //     // "drawCallback": function( settings ) {
-  //     // }
-  // });
-
-  $('table[id="mainwfptable"]').on('click', 'button[id="peak_id"]', function (event) {
-    var _$$DataTable;
-
-    $('#peek_mainppmptable').DataTable().clear().destroy();
-    $('#disp-ppmp').text('No PPMP Associated with this WFP');
-    var value = $(this).attr('data-id');
-    PeekPPMP = $('#peek_mainppmptable').DataTable((_$$DataTable = {
-      "scrollX": true,
-      "scrollY": true,
-      "ordering": true,
-      ajax: {
-        url: 'http://192.168.224.68:2019/api/peek/ppmpinwfp/' + value,
-        type: 'GET',
-        error: function error(xhr, _error, code) {
-          data = [];
-        }
-      },
-      data: [],
-      columns: [{
-        data: 'ppmp_id'
-      }, {
-        data: 'program_abbr'
-      }, {
-        data: 'item_name'
-      }, {
-        data: 'qty'
-      }, {
-        data: 'unit'
-      }, {
-        data: 'abc'
-      }, {
-        data: 'estimated_budget'
-      }, {
-        data: 'parent_type_abbr'
-      }, {
-        data: 'mode'
-      }, {
-        data: 'ppmp_comment'
-      }, {
-        data: 'ppmp_status'
-      }],
-      rowCallback: function rowCallback(row, data) {
-        $('#disp-ppmp').text(data.activities);
-        $('#ppmp-number').text(data.activities);
-      },
-      filter: false,
-      info: false
-    }, _defineProperty(_$$DataTable, "ordering", false), _defineProperty(_$$DataTable, "processing", true), _defineProperty(_$$DataTable, "retrieve", true), _defineProperty(_$$DataTable, "paging", false), _defineProperty(_$$DataTable, "searching", false), _defineProperty(_$$DataTable, "order", [1, 'asc']), _$$DataTable));
-  });
-  $('table[id="mainwfptableconsolidated"]').on('click', 'button[id="peak_id"]', function (event) {
-    var _$$DataTable2;
-
-    $('#peek_mainppmptable').DataTable().clear().destroy();
-    $('#disp-ppmp').text('No PPMP Associated with this WFP');
-    var value = $(this).attr('data-id');
-    PeekPPMP = $('#peek_mainppmptable').DataTable((_$$DataTable2 = {
-      "scrollX": true,
-      "scrollY": true,
-      "ordering": true,
-      ajax: {
-        url: 'http://192.168.224.68:2019/api/peek/ppmpinwfp/' + value,
-        type: 'GET',
-        error: function error(xhr, _error2, code) {
-          data = [];
-        }
-      },
-      data: [],
-      columns: [{
-        data: 'ppmp_id'
-      }, {
-        data: 'program_abbr'
-      }, {
-        data: 'item_name'
-      }, {
-        data: 'qty'
-      }, {
-        data: 'unit'
-      }, {
-        data: 'abc'
-      }, {
-        data: 'estimated_budget'
-      }, {
-        data: 'parent_type_abbr'
-      }, {
-        data: 'mode'
-      }, {
-        data: 'ppmp_comment'
-      }, {
-        data: 'ppmp_status'
-      }],
-      rowCallback: function rowCallback(row, data) {
-        $('#disp-ppmp').text(data.activities);
-        $('#ppmp-number').text(data.activities);
-      },
-      filter: false,
-      info: false
-    }, _defineProperty(_$$DataTable2, "ordering", false), _defineProperty(_$$DataTable2, "processing", true), _defineProperty(_$$DataTable2, "retrieve", true), _defineProperty(_$$DataTable2, "paging", false), _defineProperty(_$$DataTable2, "searching", false), _defineProperty(_$$DataTable2, "order", [1, 'asc']), _$$DataTable2));
-  });
-  $('.reload-ajax-table').on('click', function () {// $('#peek_mainppmptable').DataTable().clear().destroy();
-    // $('#peek_mainppmptable').DataTable().fnDestroy();
-    // $('#peek_mainppmptable').DataTable().clear().draw();
-    // $('#peek_mainppmptable').DataTable().destroy();
-    // $('#peek_mainppmptable').html('');
   });
 });
 
@@ -101800,8 +100810,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ICT-08\Documents\_CDE\_interface.v7\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ICT-08\Documents\_CDE\_interface.v7\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\wfp_demo\_interface.v7\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\wfp_demo\_interface.v7\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -29,7 +29,7 @@
         "@material-ui/core": "^4.11.3",
         "@ttskch/select2-bootstrap4-theme": "^1.4.0",
         "admin-lte": "^3.0.4",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "fullcalendar": "^5.4.0",
         "moment": "^2.29.1",
         "numeral": "^2.0.6",

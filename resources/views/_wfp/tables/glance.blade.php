@@ -1,5 +1,15 @@
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
+        <div class="row border m-2 d-flex justify-content-between">
+            <div class="col-md-6">
+                @include('_interface.includes.glance.wfp_gaa_knob')
+            </div>
+            <div class="col-md-6">
+                @include('_interface.includes.glance.wfp_saa_knob')
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
         <table class="table table-bordered table-sm table-hover table-condensed" id="dashboard_budget" style="width: 100%">
             <thead>
                 <tr>
@@ -22,7 +32,7 @@
                             <th>{{$i['program_abbr']}}</th>
                             {{-- <th>{{$i['allocatedNEP']}}</th> --}}
                             @if ($i['parent_type_abbr'] == 'GAA')
-                                <th class="text-success">₱ {{number_format($i['allocatedNEP'],2, '.', ',')}}</th>
+                                <th>₱ {{number_format($i['allocatedNEP'],2, '.', ',')}}</th>
                             @endif
                             @if ($i['parent_type_abbr'] == 'SAA' || $i['parent_type_abbr'] == 'Trust Funds')
                                 <th class="text-primary">₱ {{number_format($i['allocatedAmount'],2, '.', ',')}}</th>
@@ -42,15 +52,5 @@
                 </tr>
             </tfoot>
         </table>
-    </div>
-    <div class="col-md-4">
-        <div class="row border m-2 d-flex justify-content-between">
-            <div class="col-md-6">
-                @include('_interface.includes.glance.wfp_gaa_knob')
-            </div>
-            <div class="col-md-6">
-                @include('_interface.includes.glance.wfp_saa_knob')
-            </div>
-        </div>
     </div>
 </div>

@@ -1,15 +1,15 @@
-<div class="card card-primary mt-3">
+<div class="card card-dark mt-3">
     <div class="card-header">
-        <h3 class="card-title">
+        <h3 class="card-title my-auto">
             <i class="fas fa-table mr-2"></i>
             @if (session('section')->secion_name == 'Division Head')
-                <span class="font-weight-bold">WFP </span> | {{$data['year']}}
+                WFP | {{$data['year']}}
             @else
                 @if (strpos(Request::url(), 'supplemental') )
-                    <span class="font-weight-bold">Supplemental WFP </span> | {{session('division')->division_abbr}} - {{session('section')->section_abbr}} {{$data['year']}}
+                    Supplemental WFP | {{session('division')->division_abbr}} - {{session('section')->section_abbr}} {{$data['year']}}
                 @endif
                 @if (strpos(Request::url(), 'index') )
-                    <span class="font-weight-bold">WFP </span> | {{session('division')->division_abbr}} - {{session('section')->section_abbr}} {{$data['year']}}
+                    WFP | {{session('division')->division_abbr}} - {{session('section')->section_abbr}} {{$data['year']}}
                 @endif
             @endif
         </h3>

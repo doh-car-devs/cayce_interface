@@ -24,19 +24,14 @@ $(document).ready(function() {
             dataType: "json",
             type: "GET",
             data: function (params) {
-                // console.log(params.term);
                 var newparams = params.term.replace(/ /g, "%20")
-                // console.log(newparams);
 
                 var queryParameters = {
                     term: newparams || ''
                 }
-                // console.log(queryParameters)
-                // console.log(params.term)
                 return queryParameters;
             },
             processResults: function (data) {
-                // console.log(data)
                 return {
                     results: $.map(data.items, function (item) {
                         return {
@@ -51,7 +46,6 @@ $(document).ready(function() {
                     }),
                 };
             },
-            // cache: true
         },
 
     });
@@ -81,12 +75,9 @@ $(document).ready(function() {
                 var queryParameters = {
                     term: newparams || ''
                 }
-                // console.log(queryParameters)
-                // console.log(params.term)
                 return queryParameters;
             },
             processResults: function (data) {
-                // console.log(data)
                 return {
                     results: $.map(data.items, function (item) {
                         return {
@@ -101,7 +92,6 @@ $(document).ready(function() {
                     }),
                 };
             },
-            // cache: true
         },
 
     });
@@ -109,9 +99,6 @@ $(document).ready(function() {
     // on select of item
     $("#ppmp_genDesc").on('select2:select', function(e)
     {
-        // console.log(e.params.data)
-        // alert('sdfdfdf')
-        // console.log(e.params.price)
         $('#ppmp_abc1').val(e.params.data.price);
         $('#ppmp_unit1').val(e.params.data.unitname);
 
@@ -258,35 +245,24 @@ $(document).ready(function () {
         globaldisplayLength = 10;
     }
     var table_wfp = $('#mainwfptable').DataTable({
-        dom: "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" +
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        dom: 'lrtip',
+        paging: false,
         "scrollX": true,
         "ordering": true,
         "info": true,
         // "responsive": true,
-        "autoWidth": true,
-        buttons: [
-        ],
+        fixedColumns: true,
+        // "autoWidth": true,
         "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         "columnDefs": [
-            {
-                "visible": true,
-                "targets": groupColumn
-            },
-            {
-                'targets': 1,
-                'checkboxes': {
-                    'selectRow': true
-                }
-            }
+            { width: 400, targets: 1 }
         ],
         'select': {
             'style': 'multi'
          },
         "order": [[0, "asc" ]],
         "rowsGroup": [0,2],
-        "displayLength": globaldisplayLength,
+        "displayLength": 50,
         "createdRow": function (row, data, dataIndex) {
             if (data[0] == "A. Strategic Functions") {
                 $(row).addClass('active');
@@ -414,9 +390,7 @@ $(document).ready(function () {
     // });
 
     var table_wfp_consolidated = $('#mainwfptableconsolidated').DataTable({
-        dom: "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" +
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        dom: 'lrtip',
         "scrollX": true,
         "ordering": true,
         "info": true,
@@ -697,9 +671,7 @@ $('#ppmp_estbudget').attr('max', availamount);
     });
 
     var tableppmp = $('#mainppmptable').DataTable({
-        "dom": "<'row'<'col-sm-2'l><'col-sm-5'p><'col-sm-5'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "dom": '<lf<t>ip>',
         "scrollX": true,
         "ordering": true,
         "info": true,

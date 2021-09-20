@@ -11,7 +11,7 @@ require('./myScripts');
 |
 |
 */
-require('./wfp');
+// require('./wfp');
 require('./bac');
 require('./inventory');
 require('./sysad');

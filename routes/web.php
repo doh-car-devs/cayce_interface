@@ -95,8 +95,6 @@ Route::group(['middleware' => ['auth']], function() {
 	|
 	|--------------------------------------------------------------------------
 	|  Work Financial Plan Routes
-	|  Work Financial Plan Routes
-	|  Work Financial Plan Routes
 	|--------------------------------------------------------------------------
 	|
 	|
@@ -115,8 +113,6 @@ Route::group(['middleware' => ['auth']], function() {
 	/*
 	|
 	|--------------------------------------------------------------------------
-	|  Project Procurement Management Plan Routes
-	|  Project Procurement Management Plan Routes
 	|  Project Procurement Management Plan Routes
 	|--------------------------------------------------------------------------
 	|

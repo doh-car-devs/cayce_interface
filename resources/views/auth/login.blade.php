@@ -85,15 +85,15 @@
     </div>
 </body>
 <script>
-    var sessionPort = window.location.port;
-    if (sessionPort != 2019) {
-        document.getElementById("port2019").style.display = "block";
-        var ask = window.confirm("You are currently in a development mode. Click confirm to access deployment environment")
-
-        if (ask) {
-            window.location.href = "http://192.168.224.68:2019";
-        }
-    }
+    // var sessionPort = window.location.port;
+    // if (sessionPort != 2019) {
+    //     document.getElementById("port2019").style.display = "block";
+    //     var ask = window.confirm("You are currently in a development mode. Click confirm to access deployment environment")
+    //
+    //     if (ask) {
+    //         window.location.href = "http://192.168.224.68:2019";
+    //     }
+    // }
 </script>
 </html>
 

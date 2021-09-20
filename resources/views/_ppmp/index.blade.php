@@ -14,15 +14,15 @@
 						</select>
 					</form>
 				</li>
-				<li class="nav-item mr-3">
-					<a class="btn btn-primary mb-1  active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true"><i class="fas fa-table mr-1"></i> View PPMP Table</a>
-				</li>
-				<li class="nav-item mr-3">
-					<a class="btn btn-secondary mb-1" id="ItemsMedical-tab" data-toggle="pill" href="#ItemsMedical" role="tab" aria-controls="ItemsMedical" aria-selected="true"><i class="fas fa-table mr-1"></i> View Item References</a>
-				</li>
-				<li class="nav-item btn-group ml-auto">
-					{{-- <a class="btn btn-success mb-1" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false"><i class="fas fa-plus-square mr-1"></i> Create PPMP</a> --}}
-				</li>
+{{--				<li class="nav-item mr-3">--}}
+{{--					<a class="btn btn-primary mb-1  active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true"><i class="fas fa-table mr-1"></i> View PPMP Table</a>--}}
+{{--				</li>--}}
+{{--				<li class="nav-item mr-3">--}}
+{{--					<a class="btn btn-secondary mb-1" id="ItemsMedical-tab" data-toggle="pill" href="#ItemsMedical" role="tab" aria-controls="ItemsMedical" aria-selected="true"><i class="fas fa-table mr-1"></i> View Item References</a>--}}
+{{--				</li>--}}
+{{--				<li class="nav-item btn-group ml-auto">--}}
+{{--					--}}{{-- <a class="btn btn-success mb-1" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false"><i class="fas fa-plus-square mr-1"></i> Create PPMP</a> --}}
+{{--				</li>--}}
 			</ul>
 		</div>
 	</div>

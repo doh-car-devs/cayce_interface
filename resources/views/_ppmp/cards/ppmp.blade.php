@@ -14,15 +14,15 @@
             {{-- <span class="font-weight-bold">PPMP </span> | {{session('division')->division_abbr}} - {{session('section')->section_abbr}} {{$data['year']}} --}}
             @endif
         </h3>
-        <div class="card-tools">
-            <div class="btn-group export-tools flex-wrap" id="ppmptools"></div>
-            {{-- <a href="#" target="_blank" type="button" class="btn btn-tool btn-default-outline" data-toggle="tooltip" title="Print this table" onclick="window.print()">
-                <i class="fas fa-print"></i> Print Table
-            </a> --}}
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Expand Card">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
+{{--        <div class="card-tools">--}}
+{{--            <div class="btn-group export-tools flex-wrap" id="ppmptools"></div>--}}
+{{--            --}}{{-- <a href="#" target="_blank" type="button" class="btn btn-tool btn-default-outline" data-toggle="tooltip" title="Print this table" onclick="window.print()">--}}
+{{--                <i class="fas fa-print"></i> Print Table--}}
+{{--            </a> --}}
+{{--            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Expand Card">--}}
+{{--                <i class="fas fa-plus"></i>--}}
+{{--            </button>--}}
+{{--        </div>--}}
     </div>
     <div class="card-body">
         @if (strpos(Request::url(), 'supplemental') )
